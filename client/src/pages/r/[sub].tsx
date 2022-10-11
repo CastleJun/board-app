@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import Image from "next/image";
 import { useAuthState } from "../../context/auth";
+import SideBar from "../../components/base-component/side-bar";
 
 
 const SubPage: NextPage = () => {
@@ -12,18 +13,9 @@ const SubPage: NextPage = () => {
   const { authenticated, user } = useAuthState();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const fetcher = async (url: string) => {
-    try {
-      const { data } = await axios.get(url);
-      return data;
-    } catch (error) {
-      console.warn(error);
-    }
-  };
-
   const router = useRouter();
   const subName = router.query.sub;
-  const { data: sub, error } = useSWR(subName ? `/subs/${subName}` : null, fetcher);
+  const { data: sub, error } = useSWR(subName ? `/subs/${subName}` : null);
 
   useEffect(() => {
     if (!sub || !user) return;
@@ -119,7 +111,8 @@ const SubPage: NextPage = () => {
             </div>
           </div>
           <div className="flex max-w-5xl px-4 pt-5 mx-auto">
-            test
+            <div className="w-full md:mr-3 md:w-8/12"></div>
+            <SideBar sub={sub}/>
           </div>
         </>
       }
