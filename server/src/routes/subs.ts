@@ -16,6 +16,18 @@ const getSub = async (req: Request, res: Response) => {
   const name = req.params.name;
   try {
     const sub = await Sub.findOneByOrFail({ name });
+
+    const posts = await Post.find({
+      where: { subName: sub.name },
+      order: { createAt: 'DESC' },
+      relations: ['comments', 'votes']
+    });
+
+    sub.posts = posts;
+
+    if(res.locals.user){
+      sub.posts.forEach((item)=> item.setUserVote(res.locals.user))
+    }
     return res.json(sub);
   } catch (error) {
     return res.status(404).json({ error: '커뮤니티를 찾을 수 없습니다.' });
@@ -70,7 +82,7 @@ const createSub = async (req: Request, res: Response, next) => {
 
 const topSubs = async (req: Request, res: Response) => {
   try {
-    const imageUrlExp = `COALESCE(s."imageUrn", 'https://www.gravatar.com/avatar?d=mp&f=y')`;
+    const imageUrlExp = `COALESCE('${process.env.APP_URL}/images/' || s."imageUrn", 'https://www.gravatar.com/avatar?d=mp&f=y')`;
     const subs = await AppDataSource
       .createQueryBuilder()
       .select(`s.title, s.name, ${imageUrlExp} as "imageUrl", count(p.id) as "postCount"`)
