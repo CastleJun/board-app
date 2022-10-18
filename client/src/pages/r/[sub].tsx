@@ -6,6 +6,8 @@ import useSWR from "swr";
 import Image from "next/image";
 import { useAuthState } from "../../context/auth";
 import SideBar from "../../components/base-component/side-bar";
+import { Post } from "../../types";
+import PostCard from "../../components/base-component/post-card";
 
 
 const SubPage: NextPage = () => {
@@ -15,7 +17,7 @@ const SubPage: NextPage = () => {
 
   const router = useRouter();
   const subName = router.query.sub;
-  const { data: sub, error } = useSWR(subName ? `/subs/${subName}` : null);
+  const { data: sub, error, mutate } = useSWR(subName ? `/subs/${subName}` : null);
 
   useEffect(() => {
     if (!sub || !user) return;
@@ -111,7 +113,19 @@ const SubPage: NextPage = () => {
             </div>
           </div>
           <div className="flex max-w-5xl px-4 pt-5 mx-auto">
-            <div className="w-full md:mr-3 md:w-8/12"></div>
+            <div className="w-full md:mr-3 md:w-8/12">
+              {!sub && <p className="text-lg text-center">loading...</p>}
+              {sub.posts.length === 0 ?
+                <p className="text-lg text-center">아직 작성된 포스트가 없습니다.</p>
+                : (
+                  sub.posts.map((post: Post) => {
+                    return (
+                      <PostCard key={post.identifier} post={post} subMutate={mutate}/>
+                    );
+                  })
+                )
+              }
+            </div>
             <SideBar sub={sub}/>
           </div>
         </>
