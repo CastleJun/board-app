@@ -8,12 +8,12 @@ const Create = () => {
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const router = useRouter();
-  const { sub: SubName } = router.query;
+  const { sub: subName } = router.query;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (title.trim() === '' || !SubName) {
+    if (title.trim() === '' || !subName) {
       return;
     }
 
@@ -21,10 +21,10 @@ const Create = () => {
       const { data: post } = await axios.post<Post>("/posts", {
         title: title.trim(),
         body,
-        sub: SubName
+        sub: subName
       });
 
-      await router.push(`/r/${SubName}/${post.identifier}/${post.slug}`);
+      await router.push(`/r/${subName}/${post.identifier}/${post.slug}`);
     } catch (error) {
       console.warn(error);
     }
@@ -51,7 +51,7 @@ const Create = () => {
                 style={{ top: 10, right: 10 }}
                 className="absolute mb-2 text-sm text-gray-400 select-none"
               >
-                /20
+                {title.trim().length}/20
               </div>
             </div>
             <textarea
