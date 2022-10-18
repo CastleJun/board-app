@@ -14,7 +14,6 @@ const SideBar: React.FC<Props> = (props) => {
   const { sub } = props;
   const { authenticated } = useAuthState();
 
-  console.log(sub);
   return (
     <div className="hidden w-4/12 ml-3 md:block">
       <div className="bg-white border rounded">
