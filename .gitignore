@@ -30,4 +30,4 @@ yarn-debug.log*
 yarn-error.log*
 
 data
-.data/
+data/pg_stat_tmp
