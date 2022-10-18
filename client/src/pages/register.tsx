@@ -25,7 +25,7 @@ const Register = () => {
         username,
         password
       });
-      console.log(res);
+
       await router.push('/login');
     } catch (error: any) {
       console.error(error);
