@@ -49,7 +49,9 @@ const SubPage: NextPage = () => {
     if (!ownSub) return;
 
     return () => {
+      console.log('teast');
       const fileInput = fileInputRef.current;
+      console.log(fileInput);
       if (fileInput) {
         fileInput.name = type;
         fileInput.click();
@@ -73,15 +75,13 @@ const SubPage: NextPage = () => {
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                     }}
-                    onClick={handleOpenFileInput("banner")}
-                  >
-                    test123
-                  </div>
+                    onClick={() => handleOpenFileInput("banner")}
+                  />
                 ) :
                 (
-                  <div className="h-20 bg-gray-400">
-
-                  </div>
+                  <div className="h-20 bg-gray-400"
+                    onClick={() => handleOpenFileInput("banner")}
+                  />
                 )
               }
             </div>
