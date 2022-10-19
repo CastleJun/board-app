@@ -98,7 +98,7 @@ const CreateSlug = () => {
                 <div className="py-2 pr-2">
                   <div className="flex items-center">
                     <p className="text-xs text-gray-400">
-                      Posted by
+                      Posted by <i className="fas fa-abacus"/>
                       <Link href={`/u/${post.username}`}>
                         <a className="mx-1 hover:underline">
                           /u/{post.username}
@@ -128,7 +128,7 @@ const CreateSlug = () => {
                 </div>
               </div>
               <div>
-                <div className="pr-6 mb-4">
+                <div className="pr-6 mb-4 pl-9">
                   {authenticated ?
                     (<div>
                       <p className="mb-1 text-xs">

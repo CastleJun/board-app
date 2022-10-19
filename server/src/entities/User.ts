@@ -30,7 +30,7 @@ export class User extends BaseEntity {
   votes: Vote[];
 
   @BeforeInsert()
-  hasPassword = async () => {
-    this.password = await bcrypt.hash(this.password, 6);
-  };
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 6)
+  }
 }

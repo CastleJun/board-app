@@ -10,11 +10,11 @@ import axios from "axios";
 
 interface Props {
   post: Post;
-  subMutate: () => void;
+  mutate?: () => void;
 }
 
 const PostCard: React.FC<Props> = (props) => {
-  const { post, subMutate } = props;
+  const { post, mutate } = props;
   const {
     identifier,
     slug,
@@ -44,7 +44,9 @@ const PostCard: React.FC<Props> = (props) => {
 
     try {
       await axios.post('/votes', { identifier, slug, value });
-      subMutate();
+      if (mutate) {
+        mutate();
+      }
     } catch (error) {
       console.warn(error);
     }
@@ -97,13 +99,13 @@ const PostCard: React.FC<Props> = (props) => {
                   /r/{subName}
                 </a>
               </Link>
-              <span className="mx-1 text-xs text-gray-400">.</span>
+              <span className="mx-1 text-xs text-gray-400">•</span>
             </div>
           )}
 
           <p className="text-xs text-gray-400">
             Posted by
-            <Link href={`/r/${username}`}>
+            <Link href={`/u/${username}`}>
               <a className="mx-1 hover:underline">/u/${username}</a>
             </Link>
             <Link href={url}>

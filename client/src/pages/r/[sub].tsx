@@ -120,7 +120,7 @@ const SubPage: NextPage = () => {
                 : (
                   sub.posts.map((post: Post) => {
                     return (
-                      <PostCard key={post.identifier} post={post} subMutate={mutate}/>
+                      <PostCard key={post.identifier} post={post} mutate={mutate}/>
                     );
                   })
                 )

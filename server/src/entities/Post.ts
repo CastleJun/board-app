@@ -3,9 +3,10 @@ import { BeforeInsert, Column, Entity, Index, JoinColumn, ManyToMany, ManyToOne,
 import { User } from "./User";
 import Sub from "./Sub";
 import { Exclude, Expose } from "class-transformer";
-import { makeId, slugify } from "../utils";
+import { makeId } from "../utils";
 import Vote from "./Vote";
 import Comment from "./Comment";
+import { slugify } from "transliteration";
 
 @Entity("posts")
 export default class Post extends BaseEntity {
