@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 const Home: NextPage = () => {
   const { authenticated } = useAuthState();
 
-  const address = "http://localhost:4000/api/subs/sub/topSubs";
+  const address = `/subs/sub/topSubs`;
 
   const getKey = (pageIndex: number, previousPageData: Post[]) => {
     if (previousPageData && !previousPageData.length) {
