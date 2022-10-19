@@ -49,9 +49,7 @@ const SubPage: NextPage = () => {
     if (!ownSub) return;
 
     return () => {
-      console.log('teast');
       const fileInput = fileInputRef.current;
-      console.log(fileInput);
       if (fileInput) {
         fileInput.name = type;
         fileInput.click();

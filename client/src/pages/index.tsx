@@ -45,7 +45,7 @@ const Home: NextPage = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting === true) {
-          console.log('observe');
+
           setPage(page + 1);
         }
       },

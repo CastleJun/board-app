@@ -28,7 +28,7 @@ const UserPage = () => {
 
           if (data.type === 'Comment') {
             const comment: Comment = data;
-            console.log({ comment });
+
             return (
               <div
                 key={comment.identifier}
